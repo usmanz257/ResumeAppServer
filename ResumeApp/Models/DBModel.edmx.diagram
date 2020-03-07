@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6655bb6c18764f5986c5d16b28e4d90a" Name="Diagram1">
+        <EntityTypeShape EntityType="Resume_DBModel.Language" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Resume_DBModel.Personal_Education" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Resume_DBModel.Personal_Experience" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Resume_DBModel.Personal_Summery" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Resume_DBModel.Skill" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Resume_DBModel.Personal_Info" Width="1.5" PointX="0.75" PointY="6.75" />
+        <AssociationConnector Association="Resume_DBModel.FK_P_Info_Languages" />
+        <AssociationConnector Association="Resume_DBModel.FK_PInfo_Personal_Education" />
+        <AssociationConnector Association="Resume_DBModel.FK_Personal_Experience_Personal_Info" />
+        <AssociationConnector Association="Resume_DBModel.FK_PInfo_Personal_Summery" />
+        <AssociationConnector Association="Resume_DBModel.FK_PInfo_Skill" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

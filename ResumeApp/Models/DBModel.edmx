@@ -1,0 +1,425 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Resume_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Languages">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="CandidateId" Type="int" Nullable="false" />
+          <Property Name="Language1" Type="nchar" MaxLength="100" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Personal_Education">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="Institute" Type="nvarchar" MaxLength="100" />
+          <Property Name="Location" Type="nvarchar" MaxLength="500" />
+          <Property Name="Degree" Type="nvarchar" MaxLength="200" />
+          <Property Name="FieldOfStudy" Type="nvarchar" MaxLength="150" />
+          <Property Name="StartDate" Type="nvarchar" MaxLength="20" />
+          <Property Name="EndDate" Type="nvarchar" MaxLength="20" />
+          <Property Name="CandidateId" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Personal_Experience">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="CandidateId" Type="int" Nullable="false" />
+          <Property Name="JobTitle" Type="nchar" MaxLength="100" />
+          <Property Name="Orgnization" Type="nchar" MaxLength="200" />
+          <Property Name="City" Type="nchar" MaxLength="200" />
+          <Property Name="Country" Type="nchar" MaxLength="200" />
+          <Property Name="StartDate" Type="nchar" MaxLength="50" />
+          <Property Name="EndDate" Type="nchar" MaxLength="50" />
+          <Property Name="ExpDetails" Type="nchar" MaxLength="1000" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Personal_Info">
+          <Key>
+            <PropertyRef Name="CandidateId" />
+          </Key>
+          <Property Name="CandidateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="150" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="150" />
+          <Property Name="Email" Type="nvarchar" MaxLength="120" />
+          <Property Name="Websites" Type="nvarchar" MaxLength="120" />
+          <Property Name="address1" Type="nvarchar" MaxLength="500" />
+          <Property Name="address2" Type="nvarchar" MaxLength="500" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Personal_Summery">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="CandidateId" Type="int" Nullable="false" />
+          <Property Name="userResumeSummery" Type="nchar" MaxLength="1000" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="CandidateId" Type="int" Nullable="false" />
+          <Property Name="SkillName" Type="nvarchar" MaxLength="150" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_P_Info_Languages">
+          <End Role="Personal_Info" Type="Self.Personal_Info" Multiplicity="1" />
+          <End Role="Languages" Type="Self.Languages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_Info">
+              <PropertyRef Name="CandidateId" />
+            </Principal>
+            <Dependent Role="Languages">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_Experience_Personal_Info">
+          <End Role="Personal_Info" Type="Self.Personal_Info" Multiplicity="1" />
+          <End Role="Personal_Experience" Type="Self.Personal_Experience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_Info">
+              <PropertyRef Name="CandidateId" />
+            </Principal>
+            <Dependent Role="Personal_Experience">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PInfo_Personal_Education">
+          <End Role="Personal_Info" Type="Self.Personal_Info" Multiplicity="1" />
+          <End Role="Personal_Education" Type="Self.Personal_Education" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_Info">
+              <PropertyRef Name="CandidateId" />
+            </Principal>
+            <Dependent Role="Personal_Education">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PInfo_Personal_Summery">
+          <End Role="Personal_Info" Type="Self.Personal_Info" Multiplicity="1" />
+          <End Role="Personal_Summery" Type="Self.Personal_Summery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_Info">
+              <PropertyRef Name="CandidateId" />
+            </Principal>
+            <Dependent Role="Personal_Summery">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PInfo_Skill">
+          <End Role="Personal_Info" Type="Self.Personal_Info" Multiplicity="1" />
+          <End Role="Skill" Type="Self.Skill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_Info">
+              <PropertyRef Name="CandidateId" />
+            </Principal>
+            <Dependent Role="Skill">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Resume_DBModelStoreContainer">
+          <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personal_Education" EntityType="Self.Personal_Education" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personal_Experience" EntityType="Self.Personal_Experience" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personal_Info" EntityType="Self.Personal_Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personal_Summery" EntityType="Self.Personal_Summery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_P_Info_Languages" Association="Self.FK_P_Info_Languages">
+            <End Role="Personal_Info" EntitySet="Personal_Info" />
+            <End Role="Languages" EntitySet="Languages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_Experience_Personal_Info" Association="Self.FK_Personal_Experience_Personal_Info">
+            <End Role="Personal_Info" EntitySet="Personal_Info" />
+            <End Role="Personal_Experience" EntitySet="Personal_Experience" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PInfo_Personal_Education" Association="Self.FK_PInfo_Personal_Education">
+            <End Role="Personal_Info" EntitySet="Personal_Info" />
+            <End Role="Personal_Education" EntitySet="Personal_Education" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PInfo_Personal_Summery" Association="Self.FK_PInfo_Personal_Summery">
+            <End Role="Personal_Info" EntitySet="Personal_Info" />
+            <End Role="Personal_Summery" EntitySet="Personal_Summery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PInfo_Skill" Association="Self.FK_PInfo_Skill">
+            <End Role="Personal_Info" EntitySet="Personal_Info" />
+            <End Role="Skill" EntitySet="Skill" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Resume_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="CandidateId" Type="Int32" Nullable="false" />
+          <Property Name="Language1" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Personal_Info" Relationship="Resume_DBModel.FK_P_Info_Languages" FromRole="Language" ToRole="Personal_Info" />
+        </EntityType>
+        <EntityType Name="Personal_Education">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="Institute" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Degree" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FieldOfStudy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EndDate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CandidateId" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Personal_Info" Relationship="Resume_DBModel.FK_PInfo_Personal_Education" FromRole="Personal_Education" ToRole="Personal_Info" />
+        </EntityType>
+        <EntityType Name="Personal_Experience">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="CandidateId" Type="Int32" Nullable="false" />
+          <Property Name="JobTitle" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Orgnization" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="StartDate" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="EndDate" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="ExpDetails" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Personal_Info" Relationship="Resume_DBModel.FK_Personal_Experience_Personal_Info" FromRole="Personal_Experience" ToRole="Personal_Info" />
+        </EntityType>
+        <EntityType Name="Personal_Summery">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="CandidateId" Type="Int32" Nullable="false" />
+          <Property Name="userResumeSummery" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Personal_Info" Relationship="Resume_DBModel.FK_PInfo_Personal_Summery" FromRole="Personal_Summery" ToRole="Personal_Info" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="CandidateId" Type="Int32" Nullable="false" />
+          <Property Name="SkillName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Personal_Info" Relationship="Resume_DBModel.FK_PInfo_Skill" FromRole="Skill" ToRole="Personal_Info" />
+        </EntityType>
+        <EntityContainer Name="Resume_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Languages" EntityType="Self.Language" />
+          <EntitySet Name="Personal_Education" EntityType="Self.Personal_Education" />
+          <EntitySet Name="Personal_Experience" EntityType="Self.Personal_Experience" />
+          <EntitySet Name="Personal_Summery" EntityType="Self.Personal_Summery" />
+          <EntitySet Name="Skills" EntityType="Self.Skill" />
+          <EntitySet Name="Personal_Info" EntityType="Resume_DBModel.Personal_Info" />
+          <AssociationSet Name="FK_P_Info_Languages" Association="Resume_DBModel.FK_P_Info_Languages">
+            <End Role="Personal_Info" EntitySet="Personal_Info" />
+            <End Role="Language" EntitySet="Languages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PInfo_Personal_Education" Association="Resume_DBModel.FK_PInfo_Personal_Education">
+            <End Role="Personal_Info" EntitySet="Personal_Info" />
+            <End Role="Personal_Education" EntitySet="Personal_Education" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_Experience_Personal_Info" Association="Resume_DBModel.FK_Personal_Experience_Personal_Info">
+            <End Role="Personal_Info" EntitySet="Personal_Info" />
+            <End Role="Personal_Experience" EntitySet="Personal_Experience" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PInfo_Personal_Summery" Association="Resume_DBModel.FK_PInfo_Personal_Summery">
+            <End Role="Personal_Info" EntitySet="Personal_Info" />
+            <End Role="Personal_Summery" EntitySet="Personal_Summery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PInfo_Skill" Association="Resume_DBModel.FK_PInfo_Skill">
+            <End Role="Personal_Info" EntitySet="Personal_Info" />
+            <End Role="Skill" EntitySet="Skills" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Personal_Info">
+          <Key>
+            <PropertyRef Name="CandidateId" />
+          </Key>
+          <Property Name="CandidateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="Websites" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="address1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="address2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Languages" Relationship="Resume_DBModel.FK_P_Info_Languages" FromRole="Personal_Info" ToRole="Language" />
+          <NavigationProperty Name="Personal_Education" Relationship="Resume_DBModel.FK_PInfo_Personal_Education" FromRole="Personal_Info" ToRole="Personal_Education" />
+          <NavigationProperty Name="Personal_Experience" Relationship="Resume_DBModel.FK_Personal_Experience_Personal_Info" FromRole="Personal_Info" ToRole="Personal_Experience" />
+          <NavigationProperty Name="Personal_Summery" Relationship="Resume_DBModel.FK_PInfo_Personal_Summery" FromRole="Personal_Info" ToRole="Personal_Summery" />
+          <NavigationProperty Name="Skills" Relationship="Resume_DBModel.FK_PInfo_Skill" FromRole="Personal_Info" ToRole="Skill" />
+        </EntityType>
+        <Association Name="FK_P_Info_Languages">
+          <End Type="Resume_DBModel.Personal_Info" Role="Personal_Info" Multiplicity="1" />
+          <End Type="Resume_DBModel.Language" Role="Language" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_Info">
+              <PropertyRef Name="CandidateId" />
+            </Principal>
+            <Dependent Role="Language">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PInfo_Personal_Education">
+          <End Type="Resume_DBModel.Personal_Info" Role="Personal_Info" Multiplicity="1" />
+          <End Type="Resume_DBModel.Personal_Education" Role="Personal_Education" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_Info">
+              <PropertyRef Name="CandidateId" />
+            </Principal>
+            <Dependent Role="Personal_Education">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_Experience_Personal_Info">
+          <End Type="Resume_DBModel.Personal_Info" Role="Personal_Info" Multiplicity="1" />
+          <End Type="Resume_DBModel.Personal_Experience" Role="Personal_Experience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_Info">
+              <PropertyRef Name="CandidateId" />
+            </Principal>
+            <Dependent Role="Personal_Experience">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PInfo_Personal_Summery">
+          <End Type="Resume_DBModel.Personal_Info" Role="Personal_Info" Multiplicity="1" />
+          <End Type="Resume_DBModel.Personal_Summery" Role="Personal_Summery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_Info">
+              <PropertyRef Name="CandidateId" />
+            </Principal>
+            <Dependent Role="Personal_Summery">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PInfo_Skill">
+          <End Type="Resume_DBModel.Personal_Info" Role="Personal_Info" Multiplicity="1" />
+          <End Type="Resume_DBModel.Skill" Role="Skill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_Info">
+              <PropertyRef Name="CandidateId" />
+            </Principal>
+            <Dependent Role="Skill">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Resume_DBModelStoreContainer" CdmEntityContainer="Resume_DBEntities">
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="Resume_DBModel.Language">
+              <MappingFragment StoreEntitySet="Languages">
+                <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+                <ScalarProperty Name="Language1" ColumnName="Language1" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personal_Education">
+            <EntityTypeMapping TypeName="Resume_DBModel.Personal_Education">
+              <MappingFragment StoreEntitySet="Personal_Education">
+                <ScalarProperty Name="Institute" ColumnName="Institute" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="FieldOfStudy" ColumnName="FieldOfStudy" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personal_Experience">
+            <EntityTypeMapping TypeName="Resume_DBModel.Personal_Experience">
+              <MappingFragment StoreEntitySet="Personal_Experience">
+                <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="Orgnization" ColumnName="Orgnization" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ExpDetails" ColumnName="ExpDetails" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personal_Summery">
+            <EntityTypeMapping TypeName="Resume_DBModel.Personal_Summery">
+              <MappingFragment StoreEntitySet="Personal_Summery">
+                <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+                <ScalarProperty Name="userResumeSummery" ColumnName="userResumeSummery" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skills">
+            <EntityTypeMapping TypeName="Resume_DBModel.Skill">
+              <MappingFragment StoreEntitySet="Skill">
+                <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+                <ScalarProperty Name="SkillName" ColumnName="SkillName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personal_Info">
+            <EntityTypeMapping TypeName="Resume_DBModel.Personal_Info">
+              <MappingFragment StoreEntitySet="Personal_Info">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="address2" ColumnName="address2" />
+                <ScalarProperty Name="address1" ColumnName="address1" />
+                <ScalarProperty Name="Websites" ColumnName="Websites" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
